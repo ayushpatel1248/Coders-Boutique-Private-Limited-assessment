@@ -69,7 +69,7 @@ TodoServices.delete = async (id) => {
 TodoServices.edit = async (_id, updatedData) => {
     console.log("Editing Todo with ID", _id);
     try {
-        const updatedTodo = await Todo.findOneAndUpdate({_id}, {updatedData});
+        const updatedTodo = await Todo.findOneAndUpdate({_id}, updatedData, { new: true });
         
         if (!updatedTodo) {
             return {

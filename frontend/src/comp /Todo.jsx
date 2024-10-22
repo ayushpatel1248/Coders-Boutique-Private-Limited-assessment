@@ -77,8 +77,11 @@ const Todo = () => {
   };
 
   return (
-    <>
-      <h4 className="mb-5">HERE WE CAN PERFORM CRUD OPERATION👍 </h4>
+    <div 
+      className="w-screen overflow-hidden min-h-screen bg-[url('https://images.pexels.com/photos/1097930/pexels-photo-1097930.jpeg')] bg-cover bg-center flex flex-col items-center justify-center"
+    >
+      <h4 className="mb-5 text-black text-xl ">HERE WE CAN PERFORM CRUD OPERATION 👍</h4>
+      
       <div className="flex w-full max-w-sm items-center space-x-2 mb-5">
         <Input
           type="text"
@@ -90,43 +93,42 @@ const Todo = () => {
           ADD
         </Button>
       </div>
-      <div>
-        <ScrollArea className="h-72 w-90 rounded-md border">
-          <div className="p-4 w-100">
-            <h4 className="mb-4 text-sm font-medium leading-none">Todos</h4>
-            {todos.map((todo) => (
-              <div key={todo._id} className="flex items-center justify-between text-sm border border-black-500 mb-2">
-                {editingId === todo._id ? (
-                  <>
-                    <Input
-                      type="text"
-                      value={editName}
-                      onChange={(e) => setEditName(e.target.value)}
-                      placeholder="Edit item name"
-                    />
-                    <Button type="button" onClick={handleEditTodo}>
-                      Save
+      
+      <div className="w-full max-w-lg">
+        <ScrollArea className="h-72 rounded-md border bg-white/70 backdrop-blur-sm p-4">
+          <h4 className="mb-4 text-sm font-medium leading-none">Todos</h4>
+          {todos.map((todo) => (
+            <div key={todo._id} className="flex items-center justify-between text-sm border border-black-500 mb-2 p-2 bg-white/90">
+              {editingId === todo._id ? (
+                <>
+                  <Input
+                    type="text"
+                    value={editName}
+                    onChange={(e) => setEditName(e.target.value)}
+                    placeholder="Edit item name"
+                  />
+                  <Button type="button" onClick={handleEditTodo}>
+                    Save
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <span>{todo.name}</span>
+                  <div className="flex space-x-2">
+                    <Button variant="outline" size="icon" onClick={() => startEditing(todo)}>
+                      <EditIcon />
                     </Button>
-                  </>
-                ) : (
-                  <>
-                    <span>{todo.name}</span>
-                    <div className="flex space-x-2">
-                      <Button variant="outline" size="icon" onClick={() => startEditing(todo)}>
-                        <EditIcon />
-                      </Button>
-                      <Button variant="outline" size="icon" onClick={() => handleDeleteTodo(todo._id)}>
-                        <DeleteIcon />
-                      </Button>
-                    </div>
-                  </>
-                )}
-              </div>
-            ))}
-          </div>
+                    <Button variant="outline" size="icon" onClick={() => handleDeleteTodo(todo._id)}>
+                      <DeleteIcon />
+                    </Button>
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
         </ScrollArea>
       </div>
-    </>
+    </div>
   );
 };
 
