@@ -21,12 +21,11 @@ TodoController.deleteTodo = async (req, res) => {
 };
 
 TodoController.editTodo = async (req, res) => {
-  const { id } = req.body; 
-  const updatedData = req.body; 
+  const { id ,updatedData} = req.body; 
 
   const result = await TodoServices.edit(id, updatedData);
   console.log(result);
-  res.status(result.status).send(result);
+  res.send(result);
 };
 
 module.exports = TodoController;

@@ -66,10 +66,10 @@ TodoServices.delete = async (id) => {
     }
 }
 
-TodoServices.edit = async (id, updatedData) => {
-    console.log("Editing Todo with ID:", id);
+TodoServices.edit = async (_id, updatedData) => {
+    console.log("Editing Todo with ID", _id);
     try {
-        const updatedTodo = await Todo.findByIdAndUpdate(id, updatedData, { new: true, runValidators: true });
+        const updatedTodo = await Todo.findOneAndUpdate({_id}, {updatedData});
         
         if (!updatedTodo) {
             return {
@@ -88,7 +88,7 @@ TodoServices.edit = async (id, updatedData) => {
         return {
             status: 500,
             msg: "Server error",
-            data: err.message || err
+            data: err
         };
     }
 };
