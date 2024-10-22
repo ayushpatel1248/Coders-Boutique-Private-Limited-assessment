@@ -15,7 +15,7 @@ const Todo = () => {
 
   const fetchTodos = async () => {
     try {
-      const response = await axios.post("http://localhost:9999/view");
+      const response = await axios.post("https://backendfortodo-iomx.onrender.com/view");
       if (response.data.status === "OK") {
         setTodos(response.data.data);
       }
@@ -32,7 +32,7 @@ const Todo = () => {
     if (!itemName) return;
 
     try {
-      const response = await axios.post("http://localhost:9999/add", {
+      const response = await axios.post("https://backendfortodo-iomx.onrender.com/add", {
         name: itemName,
       });
       if (response.data.status === "OK") {
@@ -48,7 +48,7 @@ const Todo = () => {
     if (!editName || !editingId) return;
 
     try {
-      const response = await axios.post("http://localhost:9999/edit", {
+      const response = await axios.post("https://backendfortodo-iomx.onrender.com/edit", {
         id: editingId,
         name: editName,
       });
@@ -64,7 +64,7 @@ const Todo = () => {
 
   const handleDeleteTodo = async (id) => {
     try {
-      await axios.post("http://localhost:9999/delete", { id });
+      await axios.post("https://backendfortodo-iomx.onrender.com/delete", { id });
       fetchTodos();
     } catch (error) {
       console.error("Error deleting todo:", error);
@@ -115,10 +115,10 @@ const Todo = () => {
                 <>
                   <span>{todo.name}</span>
                   <div className="flex space-x-2">
-                    <Button variant="outline" size="icon" onClick={() => startEditing(todo)}>
+                    <Button variant="outline" size="icon" onTouchStart={() => startEditing(todo)} onClick={() => startEditing(todo)}>
                       <EditIcon />
                     </Button>
-                    <Button variant="outline" size="icon" onClick={() => handleDeleteTodo(todo._id)}>
+                    <Button variant="outline" size="icon"  onTouchStart={() => handleDeleteTodo(todo._id)} onClick={() => handleDeleteTodo(todo._id)}>
                       <DeleteIcon />
                     </Button>
                   </div>
